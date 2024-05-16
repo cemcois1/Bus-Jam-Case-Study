@@ -116,6 +116,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5743478579151740739}
+  - component: {fileID: 5578987919320369804}
   m_Layer: 0
   m_Name: Seat_2
   m_TagString: Untagged
@@ -139,6 +140,20 @@ Transform:
   - {fileID: 6465785576489423946}
   m_Father: {fileID: 2155026634739498056}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5578987919320369804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1575332886445943189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1017db4c7165ae14daa57dfb8d27be03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsFull: 0
+  human: {fileID: 0}
 --- !u!1 &1579660636246086291
 GameObject:
   m_ObjectHideFlags: 0
@@ -212,6 +227,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2309237315889517856}
+  - component: {fileID: 894867325767723421}
   m_Layer: 0
   m_Name: Seat_3
   m_TagString: Untagged
@@ -235,6 +251,20 @@ Transform:
   - {fileID: 1879133779421020800}
   m_Father: {fileID: 2155026634739498056}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &894867325767723421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3194015923491507030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1017db4c7165ae14daa57dfb8d27be03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsFull: 0
+  human: {fileID: 0}
 --- !u!1 &3217075509031559045
 GameObject:
   m_ObjectHideFlags: 0
@@ -598,8 +628,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7ecfc3fefc68064c9139be2e6b0d3fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  seats:
+  - {fileID: 6317783179308363489}
+  - {fileID: 5578987919320369804}
+  - {fileID: 894867325767723421}
   meshRenderers:
   - {fileID: 4849975447113888807}
+  busColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
 --- !u!1 &4179173765989075439
 GameObject:
   m_ObjectHideFlags: 0
@@ -782,6 +817,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6356447490568290658}
+  - component: {fileID: 6317783179308363489}
   m_Layer: 0
   m_Name: Seat_1
   m_TagString: Untagged
@@ -805,6 +841,20 @@ Transform:
   - {fileID: 6152138418063701652}
   m_Father: {fileID: 2155026634739498056}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6317783179308363489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6162955524226191582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1017db4c7165ae14daa57dfb8d27be03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsFull: 0
+  human: {fileID: 0}
 --- !u!1 &8485216534012429914
 GameObject:
   m_ObjectHideFlags: 0
