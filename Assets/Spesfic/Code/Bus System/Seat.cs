@@ -1,18 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Seat : MonoBehaviour
+namespace Spesfic.Code.Bus_System
 {
-    // Start is called before the first frame update
-    void Start()
+    public class Seat : MonoBehaviour
     {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

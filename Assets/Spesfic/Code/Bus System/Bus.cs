@@ -1,18 +1,15 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bus : MonoBehaviour
+namespace Spesfic.Code.Bus_System
 {
-    // Start is called before the first frame update
-    void Start()
+    public class Bus : MonoBehaviour
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        [SerializeField] private List<MeshRenderer> meshRenderers;
+                
+        public void SetColor(Color color)
+        {
+            meshRenderers.ForEach(x => x.material.color = color);
+        }
     }
 }

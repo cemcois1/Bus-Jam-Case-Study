@@ -5,10 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0fe5ed06-d1e6-4663-a2cc-c57abc413657" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Generic/Code/PoolBase.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Generic/Code/PoolBase/IPool.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Generic/Code/PoolBase/IPool.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Generic/Code/PoolBase/PoolBase.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Generic/Code/PoolBase/PoolBase.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Bus Jam Case Study/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Bus Jam Case Study/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Main Scene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Main Scene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Spesfic/Code/Bus System/Bus.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Spesfic/Code/Bus System/Bus.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Spesfic/Code/Bus System/BusQueue.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Spesfic/Code/Bus System/BusQueue.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Spesfic/Code/Bus System/Seat.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Spesfic/Code/Bus System/Seat.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,6 +101,7 @@
       <workItem from="1715861969625" duration="382000" />
       <workItem from="1715862434593" duration="234000" />
       <workItem from="1715863165955" duration="5000" />
+      <workItem from="1715865688481" duration="7159000" />
     </task>
     <servers />
   </component>
