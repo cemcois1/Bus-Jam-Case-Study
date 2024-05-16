@@ -1,0 +1,74 @@
+#if UNITY_EDITOR
+using System.Linq;
+using UnityEngine;
+using UnityEditor;
+
+namespace _GenericPackageStart.Core.CustomAttributes
+{
+    [CustomPropertyDrawer(typeof(FindInChildrenAttribute))]
+    public class FindInChildrenPropertyDrawer : PropertyDrawer
+    {
+        
+        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+        {
+            EditorGUI.BeginProperty(position, label, property);
+            Rect labelRect;
+            if (property.objectReferenceValue == null)
+            {
+                labelRect = new Rect(position.x, position.y, position.width - 35, position.height);
+
+            }
+            else
+            {
+                labelRect = new Rect(position.x, position.y, position.width, position.height);
+            }
+            Rect buttonRect = new Rect(position.x + position.width - 35, position.y, 45, position.height);
+            
+
+            GUIStyle greenButtonStyle = new GUIStyle(EditorStyles.miniButton);
+            greenButtonStyle.normal.textColor = Color.green;
+
+            GUIStyle redLabelStyle = new GUIStyle(EditorStyles.label);
+            redLabelStyle.normal.textColor = Color.red;
+
+            if (property.objectReferenceValue == null)
+            {
+                GUI.color = Color.red;
+                
+                EditorGUI.PropertyField(labelRect, property, true);
+                GUI.color = Color.white;
+            }
+            else
+            {
+                EditorGUI.PropertyField(labelRect, property, true);
+            }
+            if (property.objectReferenceValue == null)
+            {
+                if (GUI.Button(buttonRect, "Find", greenButtonStyle))
+                {
+                    var attribute = this.attribute as FindInChildrenAttribute;
+
+                    var fieldType = fieldInfo.FieldType;
+                    var script = property.serializedObject.targetObject as MonoBehaviour;
+
+                    if (script.gameObject != null)
+                    {
+                        var childComponent = script.transform.GetComponentsInChildren(fieldType, true).FirstOrDefault(x => attribute.IsContainInName(x.gameObject.name));
+                        //eğer attribute'in gameobject'inin adı attribute
+
+                        if (childComponent != null)
+                        {
+                            property.objectReferenceValue = childComponent;
+                            property.serializedObject.ApplyModifiedProperties();
+                        }
+
+                    }
+
+                }
+            }
+
+            EditorGUI.EndProperty();
+        }
+    }
+}
+#endif
