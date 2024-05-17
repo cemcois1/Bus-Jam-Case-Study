@@ -16,6 +16,12 @@ namespace Spesfic.Code.Grid_System
         }
         public void RemoveItem()
         {
+#if UNITY_EDITOR
+            if (holdingItem != null)
+            {
+                DestroyImmediate(holdingItem.gameObject);
+            }
+#endif
             holdingItem = null;
             IsFull = false;
         }

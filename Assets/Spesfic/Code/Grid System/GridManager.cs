@@ -8,7 +8,7 @@ namespace Spesfic.Code.Grid_System
 {
     public class GridManager : MonoBehaviour
     {
-        [SerializeField] private List<Tile> tiles;
+        public List<Tile> tiles;
         public int rowCount=5;
 
 
@@ -36,6 +36,11 @@ namespace Spesfic.Code.Grid_System
         {
             return tiles[rowindex * rowCount + coloumnIndex];
         }
+
+        public List<Tile> GetPlaceableTiles()
+        {
+            return tiles.FindAll(tile => !tile.isObstacle);
+        }
         
 
 
@@ -62,5 +67,12 @@ namespace Spesfic.Code.Grid_System
 
         #endregion
 
+        public void ClearAllPlacedItems()
+        {
+            foreach (var tile in tiles)
+            {
+                tile.RemoveItem();
+            }
+        }
     }
 }
