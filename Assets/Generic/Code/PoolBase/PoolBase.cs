@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Generic.Code.PoolBase
 {
+    [DefaultExecutionOrder(-50)]
     public class PoolBase:MonoBehaviour,IPool
     {
         public GameObject itemPrefab; // Bus prefabı
