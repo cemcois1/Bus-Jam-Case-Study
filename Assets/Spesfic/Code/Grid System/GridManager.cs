@@ -14,7 +14,7 @@ namespace Spesfic.Code.Grid_System
 
 
         [Button]
-        private void CheckAllTileOrders()
+        protected void CheckAllTileOrders()
         {
             Sequence sequence = DOTween.Sequence();
             sequence.AppendInterval(1f);

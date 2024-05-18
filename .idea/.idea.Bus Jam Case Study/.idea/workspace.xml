@@ -5,12 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0fe5ed06-d1e6-4663-a2cc-c57abc413657" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Spesfic/Code/Human/HumanClickArea.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Spesfic/Code/Human/HumanClickArea.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Bus Jam Case Study/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Bus Jam Case Study/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Main Scene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Main Scene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Spesfic/Code/Bus System/Prefabs/Bus_1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Spesfic/Code/Bus System/Prefabs/Bus_1.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Spesfic/Code/Grid System/GridManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Spesfic/Code/Grid System/GridManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Spesfic/Code/Grid System/LevelCreator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Spesfic/Code/Grid System/LevelCreator.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Spesfic/Code/Grid System/Tile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Spesfic/Code/Grid System/Tile.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -103,7 +99,8 @@
       <workItem from="1715863165955" duration="5000" />
       <workItem from="1715865688481" duration="9788000" />
       <workItem from="1715932157341" duration="6364000" />
-      <workItem from="1715950837032" duration="4279000" />
+      <workItem from="1715950837032" duration="4958000" />
+      <workItem from="1716043286308" duration="2392000" />
     </task>
     <servers />
   </component>

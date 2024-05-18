@@ -36,6 +36,7 @@ namespace Spesfic.Code.Grid_System
                     var randomValue = UnityEngine.Random.Range(0, placeableTiles.Count);
                     humanObj.transform.position = placeableTiles[randomValue]
                         .transform.position+ additionalPlacementOffset;
+                    placeableTiles[randomValue].SetItem(humanObj.transform);
                     placeableTiles.Remove(placeableTiles[randomValue]);
                     humanObj.SetActive(true);
                     humanObj.GetComponent<Human>().SetColor(humanColor);

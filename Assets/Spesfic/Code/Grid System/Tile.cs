@@ -5,14 +5,13 @@ namespace Spesfic.Code.Grid_System
 {
     public class Tile : MonoBehaviour
     {
-        public bool IsFull { get; private set;}
+        public bool IsFull => holdingItem != null;
         public bool isObstacle=false;
         [SerializeField] private Transform holdingItem;
         
         public void SetItem(Transform item)
         {
             holdingItem = item;
-            IsFull = true;
         }
         public void RemoveItem()
         {
@@ -23,12 +22,11 @@ namespace Spesfic.Code.Grid_System
             }
 #endif
             holdingItem = null;
-            IsFull = false;
         }
 
         private void OnDrawGizmos()
         {
-            var color = isObstacle ? Color.red : Color.green;
+            var color = isObstacle|| IsFull ? Color.red : Color.green;
             color.a= .5f;
             Gizmos.color = color;
             Gizmos.DrawSphere(transform.position, .2f);
