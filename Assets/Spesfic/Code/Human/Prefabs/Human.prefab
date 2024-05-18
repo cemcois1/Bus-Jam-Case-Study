@@ -1991,7 +1991,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skinnedMeshRenderer: {fileID: 5459805911869167635}
-  humanClickArea: {fileID: 0}
+  humanClickArea: {fileID: 6920615658263299703}
 --- !u!114 &8880596561114558702
 MonoBehaviour:
   m_ObjectHideFlags: 0

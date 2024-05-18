@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -12,6 +14,98 @@ namespace Spesfic.Code.Grid_System
         public int rowCount=5;
 
 
+        private void Start()
+        {
+            StartCoroutine(CalculateAllStepCounts());
+        }
+            
+        public IEnumerator CalculateAllStepCounts()
+        {
+            yield return new  WaitForSeconds(1f);
+            var unknownTileList = new List<Tile>();
+            //rowcounta göre tileları  küçük listelere ayır her row için bir liste
+            for (int i = 0; i < tiles.Count - 1; i += rowCount)
+            {
+                Debug.Log("Rowcount is " + rowCount + " i is " + i);
+                var row = tiles.GetRange(i, rowCount);
+                for (var j = 0; j < row.Count; j++)
+                {
+                    var TileIndex = i + j;
+                    if (i == 0) //ilk sıra tileların count değerini 1 yap eğer obstacle değilse
+                    {
+                        if (!tiles[TileIndex].isObstacle)
+                        {
+                            tiles[TileIndex].UpdateStepCount(1);
+                        }
+                        else
+                        {
+                            tiles[TileIndex].UpdateStepCount(Tile.ObstacleStepCount);
+                        }
+                    }
+                    else
+                    {
+                        if (!tiles[TileIndex].isObstacle)
+                        {
+                            var neighbours = GetNeighbours(tiles[TileIndex]);
+                            //en yakın komşuların stepcountlarını al ve en küçüğüne 1 ekle
+                            var validatedNeighbors = neighbours.FindAll(tile => !tile.isObstacle || !tile.isUnknownTile);
+                            if (validatedNeighbors.Count == 0)
+                            {
+                                unknownTileList.Add(tiles[TileIndex]);
+                            }
+                            else
+                            {
+                                var minimumNeighborStepCount = validatedNeighbors
+                                    .Min(tile => tile.StepCount);
+                                // Önceki adımın tamamlanmasını beklemek için bir gecikme ekleyin
+                                if (minimumNeighborStepCount>1000)
+                                {
+                                    Debug.Log("Catch");
+                                    
+                                }
+                                tiles[TileIndex].UpdateStepCount(minimumNeighborStepCount + 1);
+                                // Aralarında 0.5 saniyelik bir gecikme ekleyin
+                            }
+                        }
+                    }
+
+                    yield return null;
+
+                }
+                yield return new WaitForSeconds(.5f);
+
+            }
+            Debug.Log("Unknown tile count is " + unknownTileList.Count);
+        }
+           
+
+        
+        public List<Tile> GetNeighbours(Tile tile)
+        {
+            List<Tile> neighbours = new List<Tile>();
+            int index = tiles.IndexOf(tile);
+            //sağa bak
+            if (index % rowCount != rowCount - 1)
+            {
+                neighbours.Add(tiles[index + 1]);
+            }
+            //sola bak
+            if (index % rowCount != 0)
+            {
+                neighbours.Add(tiles[index - 1]);
+            }
+            //yukarı bak
+            if (index / rowCount != 0)
+            {
+                neighbours.Add(tiles[index - rowCount]);
+            }
+            //aşağı bak
+            if (index / rowCount != tiles.Count / rowCount - 1)
+            {
+                neighbours.Add(tiles[index + rowCount]);
+            }
+            return neighbours;
+        } 
 
         [Button]
         protected void CheckAllTileOrders()
