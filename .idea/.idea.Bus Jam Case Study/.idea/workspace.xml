@@ -8,8 +8,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Bus Jam Case Study/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Bus Jam Case Study/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Main Scene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Main Scene.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Spesfic/Code/Grid System/GridManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Spesfic/Code/Grid System/GridManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Spesfic/Code/Grid System/Tile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Spesfic/Code/Grid System/Tile.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Spesfic/Code/Human/Prefabs/Human.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Spesfic/Code/Human/Prefabs/Human.prefab" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,7 +101,7 @@
       <workItem from="1715865688481" duration="9788000" />
       <workItem from="1715932157341" duration="6364000" />
       <workItem from="1715950837032" duration="4958000" />
-      <workItem from="1716043286308" duration="11339000" />
+      <workItem from="1716043286308" duration="12784000" />
     </task>
     <servers />
   </component>
@@ -114,24 +112,5 @@
   <component name="UnityUnitTestConfiguration" currentTestLauncher="Both" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Spesfic/Code/Grid System/GridManager.cs</url>
-          <line>62</line>
-          <properties documentPath="C:\Users\cemal\Documents\Bus Jam Case Study\Assets\Spesfic\Code\Grid System\GridManager.cs" initialLine="58" containingFunctionPresentation="Method 'CalculateAllStepCounts'">
-            <startOffsets>
-              <option value="2537" />
-            </startOffsets>
-            <endOffsets>
-              <option value="2556" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

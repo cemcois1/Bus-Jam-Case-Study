@@ -48,7 +48,7 @@ namespace Spesfic.Code.Grid_System
                         {
                             var neighbours = GetNeighbours(tiles[TileIndex]);
                             //en yakın komşuların stepcountlarını al ve en küçüğüne 1 ekle
-                            var validatedNeighbors = neighbours.FindAll(tile => !tile.isObstacle || !tile.isUnknownTile);
+                            var validatedNeighbors = neighbours.FindAll(tile => !tile.isObstacle && !tile.isUnknownTile);
                             if (validatedNeighbors.Count == 0)
                             {
                                 unknownTileList.Add(tiles[TileIndex]);
@@ -67,19 +67,48 @@ namespace Spesfic.Code.Grid_System
                                 // Aralarında 0.5 saniyelik bir gecikme ekleyin
                             }
                         }
+                        else
+                        {
+                            tiles[TileIndex].UpdateStepCount(Tile.ObstacleStepCount);
+                        }
                     }
 
                     yield return null;
 
                 }
                 yield return new WaitForSeconds(.5f);
-
+                yield return StartCoroutine(CalculateUnknownStepCounts(unknownTileList));
             }
             Debug.Log("Unknown tile count is " + unknownTileList.Count);
         }
-           
 
-        
+        private IEnumerator CalculateUnknownStepCounts(List<Tile> unknownTileList)
+        {
+            //her tile 'ın komşularına unknown veya obstacle olmayan varsa o objeyi update et
+            //eğer her turda en az 1 obje update etmezsen döngüyü kır
+            while (unknownTileList.Count>0)
+            {
+                var UpdateableTile = unknownTileList
+                    .FirstOrDefault(tile => GetNeighbours(tile).Any(tile1 => !tile1.isObstacle && !tile1.isUnknownTile));
+                if (UpdateableTile!=null)
+                {
+                    var neighbours = GetNeighbours(UpdateableTile);
+                    var validatedNeighbors = neighbours.FindAll(tile => !tile.isObstacle && !tile.isUnknownTile);
+                    var minimumNeighborStepCount = validatedNeighbors
+                        .Min(tile => tile.StepCount);
+                    UpdateableTile.UpdateStepCount(minimumNeighborStepCount + 1);
+                    unknownTileList.Remove(UpdateableTile);
+                }
+                else
+                {
+                    break;
+                }
+                yield return null;
+            }
+            
+        }
+
+
         public List<Tile> GetNeighbours(Tile tile)
         {
             List<Tile> neighbours = new List<Tile>();
