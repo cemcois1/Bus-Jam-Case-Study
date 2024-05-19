@@ -14,9 +14,11 @@ namespace Spesfic.Code.Bus_System
         public Action AllBussesFinished;
         
         [SerializeField] private List<Bus> buses;
+        public Bus ActiveBus => (buses != null && buses.Count > 0) ? buses[0] : null;
+        
         [SerializeField] private List<Color> testList;
 
-        [CreateInChild][SerializeField] private Transform busLoadablePoint;
+        [CreateInChild][SerializeField] public Transform busLoadablePoint;
         [CreateInChild] [SerializeField] private Transform busFinishPoint;
         [SerializeField] private float xDistanceBetweenBusses=1f;
 
@@ -59,7 +61,8 @@ namespace Spesfic.Code.Bus_System
                 busObj.gameObject.SetActive(true);
                 var bus= busObj.GetComponent<Bus>();
                 bus.SetColor(colors[i]);
-                buses.Add(busObj.GetComponent<Bus>());
+                buses.Add(bus);
+
             }
         }
         

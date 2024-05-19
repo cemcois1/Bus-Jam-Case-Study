@@ -22,6 +22,11 @@ namespace Spesfic.Code.Grid_System
         {
             holdingItem = item;
         }
+        public void SetItem(Human human)
+        {
+            holdingItem = human.transform;
+            human.PlaceToTile(this);
+        }
 
         public void RemoveItem()
         {
@@ -45,18 +50,32 @@ namespace Spesfic.Code.Grid_System
         public void UpdateStepCount(int stepCount)
         {
             this.stepCount = stepCount;
-            if (stepCount == 10000)
+            if (isUnknownTile)
             {
                 text.text = "U";
 
             }
-            else if (stepCount==100000)
+            else if (isObstacle)
             {
                 text.text = "X";
             }
             else
             {
                 text.text = stepCount.ToString();
+                UpdateItemClickability();
+            }
+        }
+
+        private void UpdateItemClickability()
+        {
+            if (holdingItem == null) return;
+            if (!isObstacle&&!isUnknownTile)
+            {
+                holdingItem.GetComponent<Human>().humanClickArea.MakeClickable();
+            }
+            else if (isUnknownTile)
+            {
+                holdingItem.GetComponent<Human>().humanClickArea.MakeUnClickable();
             }
         }
 

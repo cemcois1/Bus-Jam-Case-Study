@@ -1,4 +1,8 @@
+using System;
 using _GenericPackageStart.Core.CustomAttributes;
+using DG.Tweening;
+using Spesfic.Code.Bus_System;
+using Spesfic.Code.Grid_System;
 using UnityEngine;
 
 namespace Spesfic.Code
@@ -9,13 +13,35 @@ namespace Spesfic.Code
     public class Human : MonoBehaviour
     {
         [FindInChildren][SerializeField] private SkinnedMeshRenderer skinnedMeshRenderer;
-        [SerializeField] private HumanClickArea humanClickArea;
-        
+        public HumanClickArea humanClickArea;
+        public Color Color => color;
+        private Color color;
+        public float walkSpeed=1f;
+
         public void SetColor(Color color)
         {
+            this.color = color;
             skinnedMeshRenderer.material.color = color;
         }
+        public void PlaceToTile(Tile tile)
+        {
+            humanClickArea.holdedTile = tile;
+        }
 
-        
+
+        public void SitToSeat(Seat seat)
+        {
+            transform.SetParent(seat.transform);
+            transform.localPosition = Vector3.zero;
+            transform.localRotation = Quaternion.identity;
+            humanClickArea.animator.SetTrigger("Sit");
+            //scale et 0 dan
+            transform.DOScale(transform.localScale,.5f).From(Vector3.zero).SetEase(Ease.OutBounce);
+        }
+
+        public void IdleAnim()
+        {
+            humanClickArea.animator.SetTrigger("Idle");
+        }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using DG.Tweening;
 using DG.Tweening.Core;
 using DG.Tweening.Plugins.Options;
@@ -65,6 +66,29 @@ public static class StaticMethods
     public static string Yellow(this string message)
     {
         return "<color=yellow>" + message + "</color>";
+    }
+
+    #endregion
+
+    #region Task & IEnumerator
+
+    public static Task AsTask(this IEnumerator coroutine, MonoBehaviour owner)
+    {
+        var tcs = new TaskCompletionSource<bool>();
+
+        owner.StartCoroutine(RunCoroutine(coroutine, tcs));
+
+        return tcs.Task;
+    }
+
+    private static IEnumerator RunCoroutine(IEnumerator coroutine, TaskCompletionSource<bool> tcs)
+    {
+        while (coroutine.MoveNext())
+        {
+            yield return coroutine.Current;
+        }
+
+        tcs.SetResult(true);
     }
 
     #endregion

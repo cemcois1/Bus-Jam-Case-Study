@@ -2,13 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Spesfic.Code.Grid_System
 {
-    public class GridManager : MonoBehaviour
+    public class GridManager : Singleton<GridManager>
     {
         public List<Tile> tiles;
         public int rowCount=5;
@@ -17,16 +18,16 @@ namespace Spesfic.Code.Grid_System
         private void Start()
         {
             StartCoroutine(CalculateAllStepCounts());
+
         }
             
         public IEnumerator CalculateAllStepCounts()
         {
-            yield return new  WaitForSeconds(1f);
             var unknownTileList = new List<Tile>();
             //rowcounta göre tileları  küçük listelere ayır her row için bir liste
             for (int i = 0; i < tiles.Count - 1; i += rowCount)
             {
-                Debug.Log("Rowcount is " + rowCount + " i is " + i);
+                //Debug.Log("Rowcount is " + rowCount + " i is " + i);
                 var row = tiles.GetRange(i, rowCount);
                 for (var j = 0; j < row.Count; j++)
                 {
@@ -48,7 +49,7 @@ namespace Spesfic.Code.Grid_System
                         {
                             var neighbours = GetNeighbours(tiles[TileIndex]);
                             //en yakın komşuların stepcountlarını al ve en küçüğüne 1 ekle
-                            var validatedNeighbors = neighbours.FindAll(tile => !tile.isObstacle && !tile.isUnknownTile);
+                            var validatedNeighbors = neighbours.FindAll(tile => !tile.isObstacle && !tile.isUnknownTile&&!tile.IsFull);
                             if (validatedNeighbors.Count == 0)
                             {
                                 unknownTileList.Add(tiles[TileIndex]);
@@ -76,7 +77,8 @@ namespace Spesfic.Code.Grid_System
                     yield return null;
 
                 }
-                yield return new WaitForSeconds(.5f);
+
+                yield return null;
                 yield return StartCoroutine(CalculateUnknownStepCounts(unknownTileList));
             }
             Debug.Log("Unknown tile count is " + unknownTileList.Count);
@@ -89,11 +91,11 @@ namespace Spesfic.Code.Grid_System
             while (unknownTileList.Count>0)
             {
                 var UpdateableTile = unknownTileList
-                    .FirstOrDefault(tile => GetNeighbours(tile).Any(tile1 => !tile1.isObstacle && !tile1.isUnknownTile));
+                    .FirstOrDefault(tile => GetNeighbours(tile).Any(tile1 => !tile1.isObstacle && !tile1.isUnknownTile&& !tile1.IsFull));
                 if (UpdateableTile!=null)
                 {
                     var neighbours = GetNeighbours(UpdateableTile);
-                    var validatedNeighbors = neighbours.FindAll(tile => !tile.isObstacle && !tile.isUnknownTile);
+                    var validatedNeighbors = neighbours.FindAll(tile => !tile.isObstacle && !tile.isUnknownTile&&!tile.IsFull);
                     var minimumNeighborStepCount = validatedNeighbors
                         .Min(tile => tile.StepCount);
                     UpdateableTile.UpdateStepCount(minimumNeighborStepCount + 1);
@@ -166,6 +168,52 @@ namespace Spesfic.Code.Grid_System
         }
         
 
+        public void ClearAllPlacedItems()
+        {
+            foreach (var tile in tiles)
+            {
+                tile.RemoveItem();
+            }
+        }
+
+        public async Task<List<Vector3>> DrawPathAsync(Tile holdedTile)
+        {
+            List<Vector3> positions = new List<Vector3>();
+            positions.Add(holdedTile.transform.position);
+            var currentTile = holdedTile;
+
+            while (currentTile.StepCount != 1)
+            {
+                var neighbours = GetNeighbours(currentTile);
+                var minStepCount = currentTile.StepCount;
+                Tile nextTile = null;
+
+                foreach (var neighbour in neighbours)
+                {
+                    if (!neighbour.IsFull && neighbour.StepCount < minStepCount)
+                    {
+                        minStepCount = neighbour.StepCount;
+                        nextTile = neighbour;
+                    }
+                }
+
+                if (nextTile != null)
+                {
+                    positions.Add(nextTile.transform.position);
+                    currentTile = nextTile;
+                }
+                else
+                {
+                    break;
+                }
+
+                // Coroutine adımı tamamlandıktan sonra bir çerçeve bekleyin
+                await Task.Yield();
+            }
+
+            return positions;
+        }
+
 
         #region Editor Methods
 
@@ -190,12 +238,6 @@ namespace Spesfic.Code.Grid_System
 
         #endregion
 
-        public void ClearAllPlacedItems()
-        {
-            foreach (var tile in tiles)
-            {
-                tile.RemoveItem();
-            }
-        }
     }
+    
 }
