@@ -1046,7 +1046,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6790944150798009038, guid: 541b1f0b45e4ac34882257d5a1eb3294, type: 3}
       propertyPath: stepCount
-      value: 100000
+      value: 10000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1456,6 +1456,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 762045610}
+  - {fileID: 1404499021}
   - {fileID: 618475183}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1480,6 +1481,7 @@ MonoBehaviour:
   - {r: 1, g: 0.57296365, b: 0.0039215684, a: 1}
   busLoadablePoint: {fileID: 762045610}
   busFinishPoint: {fileID: 618475183}
+  busGatePoint: {fileID: 1404499021}
   xDistanceBetweenBusses: -5.3
   BusPool: {fileID: 952873233}
   busMovementTime: 1
@@ -2914,6 +2916,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fdda7edfe3d66f428de99f7628a8e03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1404499020
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1404499021}
+  m_Layer: 0
+  m_Name: Human Gate Point
+  m_TagString: Untagged
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1404499021
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1404499020}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -1.59}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 502900307}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1436487802
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -25,10 +25,9 @@ namespace Spesfic.Code
         {
             if (!holdedTile.isUnknownTile&&!MatchAreaManager.Instance.IsFull)
             {
-                OnHumanClicked?.Invoke(human);
                 var positions = await GridManager.Instance.DrawPathAsync(holdedTile);
-
                 holdedTile.SetItem((Transform)null);
+                
                 StartCoroutine(GridManager.Instance.CalculateAllStepCounts());
 
                 Debug.Log("Path drawned with " + positions.Count + " points");
@@ -50,7 +49,8 @@ namespace Spesfic.Code
                         moveSequence.Join(human.transform.DOLookAt(positions[i], .05f).SetEase(Ease.Linear)); // 1 saniyede hareket
                     }
                     moveSequence.OnComplete(()=>HumanExitedGrid?.Invoke(human));
-                    
+                    OnHumanClicked?.Invoke(human);
+
                 }
                 else
                 {

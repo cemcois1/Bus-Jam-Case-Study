@@ -33,7 +33,7 @@ namespace Spesfic.Code
         {
             transform.SetParent(seat.transform);
             transform.localPosition = Vector3.zero;
-            transform.localRotation = Quaternion.identity;
+            transform.localRotation = Quaternion.Euler(seat.SitRotation);
             humanClickArea.animator.SetTrigger("Sit");
             //scale et 0 dan
             transform.DOScale(transform.localScale,.5f).From(Vector3.zero).SetEase(Ease.OutBounce);

@@ -18,17 +18,20 @@ namespace Spesfic.Code.Bus_System
         
         [SerializeField] private List<Color> testList;
 
-        [CreateInChild][SerializeField] public Transform busLoadablePoint;
+        [CreateInChild] public Transform busLoadablePoint;
         [CreateInChild] [SerializeField] private Transform busFinishPoint;
+        public Transform busGatePoint;
         [SerializeField] private float xDistanceBetweenBusses=1f;
 
 
         [CreateInChild][SerializeField] private PoolBase BusPool;
 
+
         [Header("Polish")]
         [SerializeField] float busMovementTime = 1f;
+
         [SerializeField] private AnimationCurve busMovementCurve;
-        
+
         private void OnEnable()
         {
             CreateBusList(testList);

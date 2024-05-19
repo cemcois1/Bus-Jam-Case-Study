@@ -50,6 +50,13 @@ namespace Spesfic.Code.Grid_System
                     humanComponent.SetColor(humanColor);
                     humanComponent.humanClickArea.OnHumanClicked += human =>
                     {
+                        bool SitableOnBus = /*busQueue.ActiveBus.BusColor == human.Color&&*/
+                                            !busQueue.ActiveBus.allSeatsFull;
+                        if (!SitableOnBus)
+                        {
+                            var emptyTile = matchAreaManager.GetEmptyTile();
+                            emptyTile.SetItem(human);
+                        }
                         Debug.Log("TODO Fill tiles before Human Go".Red());
                     };
                     humanComponent.humanClickArea.HumanExitedGrid += human =>
@@ -58,25 +65,32 @@ namespace Spesfic.Code.Grid_System
 
                         //mümkünse bus queue'ya ekle değilse matcing area'ya ekle
                         var walkBaseTime = .25f;
-                        if (busQueue.ActiveBus.BusColor == human.Color&&!busQueue.ActiveBus.allSeatsFull)
+                        Debug.Log("TODO General Color Data Oluştur");
+                        bool SitableOnBus = /*busQueue.ActiveBus.BusColor == human.Color&&*/!busQueue.ActiveBus.allSeatsFull;
+                        if (SitableOnBus)
                         {
                             Debug.Log("Add Human to bus".Blue());
-                            var loadablePosition = busQueue.busLoadablePoint.position;
+                            var loadablePosition = busQueue.busGatePoint.position+ additionalPlacementOffset;
                             human.transform.DOLookAt(loadablePosition, .05f);
                             human.transform.DOMove(loadablePosition,
                                 Vector3.Distance(loadablePosition,human.transform.position) /human.walkSpeed).OnComplete(
-                                    ()=>busQueue.ActiveBus.AddHuman(human)
-                                );
+                                ()=>busQueue.ActiveBus.AddHuman(human)
+                            );
                         }
                         else
                         {
-                            var emptyTile = matchAreaManager.GetEmptyTile();
-                            emptyTile.SetItem(human);
-                            var position = emptyTile.transform.position;
+                            
+                            var position = human.humanClickArea.holdedTile.transform.position+
+                                           additionalPlacementOffset;
                             human.transform.DOLookAt(position, .05f);
                             human.transform.DOMove(position    ,
-                                Vector3.Distance(position,human.transform.position)/human.walkSpeed)
-                                .OnComplete(human.IdleAnim);
+                                    Vector3.Distance(position,human.transform.position)/human.walkSpeed)
+                                .OnComplete(() =>
+                                {
+                                    human.IdleAnim();
+                                    human.transform.DOLookAt(new Vector3(0,0, 100000f), .05f);
+
+                                });
                             
                         }
                     };
