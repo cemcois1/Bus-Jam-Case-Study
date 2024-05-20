@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using _GenericPackageStart.Code._Mechanic.CustomAttributes.FinInParentAttribute;
+using _SpesficCode.Timer;
 using DG.Tweening;
 using Generic.Code.PoolBase;
 using Sirenix.OdinInspector;
@@ -35,21 +36,12 @@ namespace Spesfic.Code.Bus_System
 
         private void OnEnable()
         {
+            AllBussesFinished+=PuzzleGameEvents.LevelComplated;
+        }
 
-            /*var sequence = DOTween.Sequence();
-            sequence.AppendInterval(5);
-
-            sequence.Append(ShiftBussesAnimation(new List<Bus>(buses)));
-            ShiftBussesLogic();
-
-            sequence.AppendInterval(5);
-            for (int i = 0; i < 4; i++)
-            {
-                sequence.Append(ShiftBussesAnimation(new List<Bus>(buses)));
-                ShiftBussesLogic();
-            }*/
-
-
+        private void OnDisable()
+        {
+            AllBussesFinished-=PuzzleGameEvents.LevelComplated;
         }
 
         [Button]

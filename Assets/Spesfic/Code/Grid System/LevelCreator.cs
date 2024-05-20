@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using _GenericPackageStart.Code._Mechanic.CustomAttributes.FinInParentAttribute;
+using _SpesficCode.Timer;
 using DG.Tweening;
 using Generic.Code.PoolBase;
 using Spesfic.Code.Bus_System;
@@ -22,7 +23,13 @@ namespace Spesfic.Code.Grid_System
         
         private void OnEnable()
         {
+            PuzzleGameEvents.LevelFailed +=StopLevel;
             CreateLevel();
+        }
+
+        private void StopLevel(int obj)
+        {
+            
         }
 
         private void CreateLevel()
@@ -57,6 +64,7 @@ namespace Spesfic.Code.Grid_System
             humanComponent.SetColor(colorData);
             humanComponent.humanClickArea.OnHumanClicked += human =>
             {
+                PuzzleTimer.Instance.SetIsWorking(true);
                 bool SitableOnBus = busQueue.ActiveBus.BusColor == human.Color &&
                                     !busQueue.ActiveBus.allSeatsFull;
                 if (!SitableOnBus)
