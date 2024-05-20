@@ -14,6 +14,8 @@ namespace Spesfic.Code
     public class Human : MonoBehaviour
     {
         [FindInChildren][SerializeField] private SkinnedMeshRenderer skinnedMeshRenderer;
+        [SerializeField] private ParticleSystem SeatLoadParticle;
+        
         public HumanClickArea humanClickArea;
         public MatchableColorData Color => color;
         private MatchableColorData color;
@@ -36,8 +38,9 @@ namespace Spesfic.Code
             transform.localPosition = Vector3.zero;
             transform.localRotation = Quaternion.Euler(seat.SitRotation);
             humanClickArea.animator.SetTrigger("Sit");
+            SeatLoadParticle.Play();
             //scale et 0 dan
-            transform.DOScale(transform.localScale,.5f).From(Vector3.zero).SetEase(Ease.OutBounce);
+            //transform.DOScale(transform.localScale,.5f).From(Vector3.zero).SetEase(Ease.OutBounce);
         }
 
         public void MoveToBus(Vector3 loadablePosition, Bus ActiveBus)
@@ -45,8 +48,12 @@ namespace Spesfic.Code
             humanClickArea.animator.SetTrigger("Run");
             transform.DOLookAt(loadablePosition, .05f);
             transform.DOMove(loadablePosition,
-                Vector3.Distance(loadablePosition, transform.position) / walkSpeed).OnComplete(
-                () => ActiveBus.AddHuman(this));
+                Vector3.Distance(loadablePosition, transform.position) / walkSpeed).SetEase(Ease.Linear).OnComplete(
+                () =>
+                {
+                    ActiveBus.AddHuman(this);
+                    Debug.Log("Human added to bus!");
+                });
         }
         public void IdleAnim()
         {
@@ -54,5 +61,16 @@ namespace Spesfic.Code
         }
 
 
+        public void MoveToTile(Vector3 position)
+        {
+            transform.DOLookAt(position, .05f);
+            transform.DOMove(position,
+                    Vector3.Distance(position, transform.position) / walkSpeed)
+                .OnComplete(() =>
+                {
+                    IdleAnim();
+                    transform.DOLookAt(new Vector3(0, 0, 100000f), .05f);
+                });
+        }
     }
 }

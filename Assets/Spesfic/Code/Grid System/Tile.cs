@@ -17,6 +17,15 @@ namespace Spesfic.Code.Grid_System
         public int StepCount => stepCount;
         [SerializeField,ReadOnly]private int stepCount=10000;
         public TextMeshPro text;
+        [SerializeField] private MeshRenderer meshRenderer;
+
+        private void OnEnable()
+        {
+            if (isObstacle)
+            {
+                meshRenderer.enabled = false;
+            }
+        }
 
         public Human GetHoldedHuman()
         {

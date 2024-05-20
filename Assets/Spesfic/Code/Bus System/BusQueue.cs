@@ -18,7 +18,6 @@ namespace Spesfic.Code.Bus_System
         [SerializeField] private List<Bus> buses;
         public Bus ActiveBus => (buses != null && buses.Count > 0) ? buses[0] : null;
         
-        [SerializeField] private List<MatchableColorData> testList;
 
         [CreateInChild] public Transform busLoadablePoint;
         [CreateInChild] [SerializeField] private Transform busFinishPoint;
@@ -36,7 +35,6 @@ namespace Spesfic.Code.Bus_System
 
         private void OnEnable()
         {
-            CreateBusList(testList);
 
             /*var sequence = DOTween.Sequence();
             sequence.AppendInterval(5);
@@ -67,7 +65,6 @@ namespace Spesfic.Code.Bus_System
                 var bus= busObj.GetComponent<Bus>();
                 bus.OnBussFull += () =>
                 {
-                    Debug.Log("Bus is full".Red());
                     ShiftBussesAnimation(buses);
                     ShiftBussesLogic();
                 };
@@ -81,7 +78,6 @@ namespace Spesfic.Code.Bus_System
         {
             //listenin ilk elemanını sil
             buses.RemoveAt(0);
-            testList.RemoveAt(0);
             if (buses.Count == 0)
             {
                 Debug.Log("All busses finished".Red());
@@ -110,7 +106,6 @@ namespace Spesfic.Code.Bus_System
             {
                 if (shiftableBuses.Count > 0)
                 {
-                    Debug.Log(shiftableBuses+" Bus arrived".Blue(),shiftableBuses[0]);
                     NewBusArrived?.Invoke(shiftableBuses[0]);
                 }
             });

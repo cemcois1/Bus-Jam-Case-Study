@@ -81,7 +81,7 @@ namespace Spesfic.Code.Grid_System
                 yield return null;
                 yield return StartCoroutine(CalculateUnknownStepCounts(unknownTileList));
             }
-            Debug.Log("Unknown tile count is " + unknownTileList.Count);
+//            Debug.Log("Unknown tile count is " + unknownTileList.Count);
         }
 
         private IEnumerator CalculateUnknownStepCounts(List<Tile> unknownTileList)

@@ -122,6 +122,7 @@ MonoBehaviour:
   holdingItem: {fileID: 0}
   stepCount: 10000
   text: {fileID: 8158932256955948740}
+  meshRenderer: {fileID: 6995373765343526526}
 --- !u!1 &7671840009107600697
 GameObject:
   m_ObjectHideFlags: 0

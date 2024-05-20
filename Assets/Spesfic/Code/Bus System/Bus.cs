@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using DG.Tweening;
 using Spesfic.Code.Color_Data;
 using UnityEngine;
 
@@ -16,6 +17,15 @@ namespace Spesfic.Code.Bus_System
         public MatchableColorData BusColor => busColor;
         [SerializeField] private MatchableColorData busColor;
 
+        [Header( "Visual Polish")]
+        [SerializeField] private Transform yPivotTransform;
+        private float maxYDistance = .05f;
+        private float YAnimDuration=.45f;
+        
+        private void OnEnable()
+        {
+            yPivotTransform.DOLocalMoveY(-maxYDistance/2, YAnimDuration).From(maxYDistance / 2).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutSine);
+        }
 
         public void SetColor(MatchableColorData color)
         {
@@ -32,7 +42,12 @@ namespace Spesfic.Code.Bus_System
                 emptySeat.SetHuman(human);
                 if (allSeatsFull)
                 {
+                    Debug.Log("Bus is Full!".Red());
                     OnBussFull?.Invoke();
+                }
+                else
+                {
+                    Debug.Log("Bus is not Full!".Green());
                 }
             }
         }

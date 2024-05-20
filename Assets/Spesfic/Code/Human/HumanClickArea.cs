@@ -30,7 +30,7 @@ namespace Spesfic.Code
                 
                 StartCoroutine(GridManager.Instance.CalculateAllStepCounts());
 
-                Debug.Log("Path drawned with " + positions.Count + " points");
+//                Debug.Log("Path drawned with " + positions.Count + " points");
                 if (positions.Count > 0) // line'ı editörde çiz ve sequence oluştur
                 {
                     Sequence moveSequence = DOTween.Sequence();
@@ -48,9 +48,9 @@ namespace Spesfic.Code
                         moveSequence.Append(human.transform.DOMove(positions[i], .25f).SetEase(Ease.Linear)); // 1 saniyede hareket
                         moveSequence.Join(human.transform.DOLookAt(positions[i], .05f).SetEase(Ease.Linear)); // 1 saniyede hareket
                     }
-                    moveSequence.OnComplete(()=>HumanExitedGrid?.Invoke(human));
-                    OnHumanClicked?.Invoke(human);
 
+                    OnHumanClicked?.Invoke(human);
+                    moveSequence.OnComplete(()=>HumanExitedGrid?.Invoke(human));
                 }
                 else
                 {
