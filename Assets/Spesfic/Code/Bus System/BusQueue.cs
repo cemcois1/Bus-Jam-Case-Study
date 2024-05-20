@@ -11,7 +11,7 @@ using UnityEngine.Serialization;
 
 namespace Spesfic.Code.Bus_System
 {
-    public class BusQueue : MonoBehaviour
+    public class BusQueue : Singleton<BusQueue>
     {
         public Action AllBussesFinished;
         public static Action<Bus> NewBusArrived;

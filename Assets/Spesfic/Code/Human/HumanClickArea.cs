@@ -2,6 +2,7 @@ using System;
 using _GenericPackageStart.Core.CustomAttributes;
 using DG.Tweening;
 using Sirenix.OdinInspector;
+using Spesfic.Code.Bus_System;
 using Spesfic.Code.Grid_System;
 using Spesfic.Code.MatchArea;
 using UnityEngine;
@@ -23,6 +24,8 @@ namespace Spesfic.Code
 
         private async void OnMouseDown()
         {
+            if ( BusQueue.Instance.ActiveBus.LoadedTotal == 3) return;
+
             if (!holdedTile.isUnknownTile&&!MatchAreaManager.Instance.IsFull)
             {
                 var positions = await GridManager.Instance.DrawPathAsync(holdedTile);
@@ -65,7 +68,11 @@ namespace Spesfic.Code
                 holdedTile.transform.DOKill(true);
                 var meshRenderer = holdedTile.GetComponent<MeshRenderer>();
                 meshRenderer.DOKill(true);
-                meshRenderer.material.DOColor(Color.red, .5f).From();
+                meshRenderer.material.color = holdedTile.BaseColor;
+                meshRenderer.material.DOColor(Color.red, .1f).SetLoops(2, LoopType.Yoyo).OnComplete(() =>
+                {
+                    meshRenderer.material.color = holdedTile.BaseColor;
+                });
                 holdedTile.transform.DOShakeRotation(.5f, 10, 10);
             }
         }

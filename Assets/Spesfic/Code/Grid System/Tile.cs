@@ -19,8 +19,11 @@ namespace Spesfic.Code.Grid_System
         public TextMeshPro text;
         [SerializeField] private MeshRenderer meshRenderer;
 
+         public Color BaseColor;
+            
         private void OnEnable()
         {
+            BaseColor= meshRenderer.material.color;
             if (isObstacle)
             {
                 meshRenderer.enabled = false;

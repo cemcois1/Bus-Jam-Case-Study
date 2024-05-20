@@ -8,6 +8,7 @@ namespace Spesfic.Code.Bus_System
 {
     public class Bus : MonoBehaviour
     {
+        public int LoadedTotal = 0;
         public Action OnBussFull;
 
         [SerializeField] private List<Seat> seats;

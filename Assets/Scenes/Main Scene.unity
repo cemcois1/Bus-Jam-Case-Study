@@ -456,6 +456,7 @@ MonoBehaviour:
   LevelFailedCanvasGroup: {fileID: 1268505029}
   levelComplatedCanvasGroup: {fileID: 1414598259}
   levelHolderCanvasGroup: {fileID: 1952627923}
+  tapToStartCanvasGroup: {fileID: 770762830}
   levelText: {fileID: 910800164}
 --- !u!1 &119742370
 GameObject:
@@ -1487,7 +1488,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!225 &770762830
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -2923,7 +2924,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1388643941}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 350295215}
+        m_TargetAssemblyTypeName: LevelManager, Assembly-CSharp
+        m_MethodName: RestartLevel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1388643941
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4095,7 +4108,7 @@ MonoBehaviour:
   colors:
   - {fileID: 11400000, guid: 5e2e6840b1d1d6c4aa4a03ed0aa22b07, type: 2}
   - {fileID: 11400000, guid: 1785517ea5e67a24586feda931b24a80, type: 2}
-  - {fileID: 11400000, guid: e8ec91019bdaac04695b60aaaf93c6eb, type: 2}
+  - {fileID: 11400000, guid: 3c23c31ad968299468d94a727f579b1e, type: 2}
   additionalPlacementOffset: {x: 0, y: 0.12, z: 0}
 --- !u!1 &1952627921
 GameObject:
@@ -4512,7 +4525,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2101320477}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 350295215}
+        m_TargetAssemblyTypeName: LevelManager, Assembly-CSharp
+        m_MethodName: RestartLevel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2101320477
 MonoBehaviour:
   m_ObjectHideFlags: 0

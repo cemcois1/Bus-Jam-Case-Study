@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using _GenericPackageStart.Code._Mechanic.CustomAttributes.FinInParentAttribute;
+using _SpesficCode.Timer;
 using Sirenix.OdinInspector;
 using Spesfic.Code.Bus_System;
 using Spesfic.Code.Grid_System;
@@ -16,6 +17,7 @@ namespace Spesfic.Code.MatchArea
         [FindInParent][SerializeField] private BusQueue busQueue;
         
         public bool IsFull => tiles.All(tile => tile.IsFull);
+        public bool IsLastEmptyTile => tiles.Count(tile => !tile.IsFull) == 1;
 
         private void OnEnable()
         {
@@ -41,6 +43,15 @@ namespace Spesfic.Code.MatchArea
                         tile.SetItem((Transform) null);
                     }
                 }
+            }
+            //eğer bütün tilelar dolu ise Game over
+            if (IsFull)
+            {
+
+                PuzzleGameEvents.LevelFailed.Invoke(0);
+
+
+                Debug.Log("Game Over");
             }
         }
 

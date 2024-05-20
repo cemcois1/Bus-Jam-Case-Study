@@ -14,12 +14,26 @@ namespace Spesfic.Code.UI_Manager
         [SerializeField] private CanvasGroup LevelFailedCanvasGroup;
         [SerializeField] private CanvasGroup levelComplatedCanvasGroup;
         [SerializeField] private CanvasGroup levelHolderCanvasGroup;
+        [SerializeField] private CanvasGroup tapToStartCanvasGroup;
         [SerializeField] private TextMeshProUGUI levelText;
 
+        private void OnEnable()
+        {
+            PuzzleGameEvents.LevelFailed += ShowFailedUI;
+            PuzzleGameEvents.LevelComplated += ShowLevelComplatedUI;
+            PuzzleGameEvents.levelStarted += UpdateLevel;
+        }
+
+        private void OnDisable()
+        {
+            PuzzleGameEvents.LevelFailed -= ShowFailedUI;
+            PuzzleGameEvents.LevelComplated -= ShowLevelComplatedUI;
+        }
         public void UpdateLevel()
         {
             levelHolderCanvasGroup.OpenPanel();
             levelText.text = LevelManager.Instance.LevelCount.ToString();
+            tapToStartCanvasGroup.OpenPanel();
         }
         
         public void ShowLevelComplatedUI()
@@ -38,17 +52,7 @@ namespace Spesfic.Code.UI_Manager
             outOfTimeCanvasGroup.ClosePanel();
         }
 
-        private void OnEnable()
-        {
-            PuzzleGameEvents.LevelFailed += ShowFailedUI;
-            PuzzleGameEvents.LevelComplated += ShowLevelComplatedUI;
-        }
 
-        private void OnDisable()
-        {
-            PuzzleGameEvents.LevelFailed -= ShowFailedUI;
-            PuzzleGameEvents.LevelComplated -= ShowLevelComplatedUI;
-        }
 
         private void ShowFailedUI(int index)
         {
