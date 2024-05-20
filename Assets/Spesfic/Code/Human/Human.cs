@@ -1,6 +1,8 @@
 using System;
 using _GenericPackageStart.Core.CustomAttributes;
 using DG.Tweening;
+using DG.Tweening.Core;
+using DG.Tweening.Plugins.Options;
 using Spesfic.Code.Bus_System;
 using Spesfic.Code.Color_Data;
 using Spesfic.Code.Grid_System;
@@ -43,11 +45,11 @@ namespace Spesfic.Code
             //transform.DOScale(transform.localScale,.5f).From(Vector3.zero).SetEase(Ease.OutBounce);
         }
 
-        public void MoveToBus(Vector3 loadablePosition, Bus ActiveBus)
+        public TweenerCore<Vector3, Vector3, VectorOptions> MoveToBus(Vector3 loadablePosition, Bus ActiveBus)
         {
             humanClickArea.animator.SetTrigger("Run");
             transform.DOLookAt(loadablePosition, .05f);
-            transform.DOMove(loadablePosition,
+            return transform.DOMove(loadablePosition,
                 Vector3.Distance(loadablePosition, transform.position) / walkSpeed).SetEase(Ease.Linear).OnComplete(
                 () =>
                 {

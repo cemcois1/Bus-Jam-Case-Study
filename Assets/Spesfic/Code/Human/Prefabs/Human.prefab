@@ -3114,7 +3114,7 @@ ParticleSystem:
     magnitude:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.39
+      scalar: 0.4
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -3168,7 +3168,7 @@ ParticleSystem:
     inWorldSpace: 0
     multiplyDragByParticleSize: 1
     multiplyDragByParticleVelocity: 1
-    dampen: 0.07
+    dampen: 0.2
     drag:
       serializedVersion: 2
       minMaxState: 0

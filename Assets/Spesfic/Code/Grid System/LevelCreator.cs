@@ -23,14 +23,9 @@ namespace Spesfic.Code.Grid_System
         
         private void OnEnable()
         {
-            PuzzleGameEvents.LevelFailed +=StopLevel;
             CreateLevel();
         }
-
-        private void StopLevel(int obj)
-        {
-            
-        }
+        
 
         private void CreateLevel()
         {

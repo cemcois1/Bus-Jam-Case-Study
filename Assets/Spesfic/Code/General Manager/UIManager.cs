@@ -1,5 +1,7 @@
 using System;
 using _SpesficCode.Timer;
+using DG.Tweening;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -11,6 +13,14 @@ namespace Spesfic.Code.UI_Manager
         [SerializeField] private CanvasGroup outOfTimeCanvasGroup;
         [SerializeField] private CanvasGroup LevelFailedCanvasGroup;
         [SerializeField] private CanvasGroup levelComplatedCanvasGroup;
+        [SerializeField] private CanvasGroup levelHolderCanvasGroup;
+        [SerializeField] private TextMeshProUGUI levelText;
+
+        public void UpdateLevel()
+        {
+            levelHolderCanvasGroup.OpenPanel();
+            levelText.text = LevelManager.Instance.LevelCount.ToString();
+        }
         
         public void ShowLevelComplatedUI()
         {

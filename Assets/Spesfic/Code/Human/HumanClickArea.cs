@@ -62,6 +62,10 @@ namespace Spesfic.Code
             else
             {
                 Debug.Log("Unknown tile clicked");
+                holdedTile.transform.DOKill(true);
+                var meshRenderer = holdedTile.GetComponent<MeshRenderer>();
+                meshRenderer.DOKill(true);
+                meshRenderer.material.DOColor(Color.red, .5f).From();
                 holdedTile.transform.DOShakeRotation(.5f, 10, 10);
             }
         }
