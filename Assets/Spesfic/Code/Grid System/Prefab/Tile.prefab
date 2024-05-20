@@ -120,6 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   holdingItem: {fileID: 0}
+  stepCount: 10000
   text: {fileID: 8158932256955948740}
 --- !u!1 &7671840009107600697
 GameObject:
@@ -138,7 +139,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8670400703184620854
 RectTransform:
   m_ObjectHideFlags: 0

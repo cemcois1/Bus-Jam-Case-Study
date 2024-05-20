@@ -4,6 +4,7 @@ using _GenericPackageStart.Code._Mechanic.CustomAttributes.FinInParentAttribute;
 using DG.Tweening;
 using Generic.Code.PoolBase;
 using Spesfic.Code.Bus_System;
+using Spesfic.Code.Color_Data;
 using Spesfic.Code.MatchArea;
 using UnityEngine;
 
@@ -16,7 +17,7 @@ namespace Spesfic.Code.Grid_System
         [SerializeField,FindInParent] private BusQueue busQueue;
         
         [SerializeField,FindInParent] private PoolBase humanBase;
-        [SerializeField] private List<Color> colors;
+        [SerializeField] private List<MatchableColorData> colors;
         [SerializeField] private Vector3 additionalPlacementOffset;
         
         private void OnEnable()
@@ -34,7 +35,7 @@ namespace Spesfic.Code.Grid_System
                 return;
             }
             //bütün renklerden 3 tane insan oluştur ve random bir şekilde yerleştir
-            foreach (var humanColor in colors)
+            foreach (var colorData in colors)
             {
                 for (int i = 0; i < 3; i++)
                 {
@@ -47,10 +48,10 @@ namespace Spesfic.Code.Grid_System
                     placeableTiles[randomValue].SetItem(humanComponent);
                     placeableTiles.Remove(placeableTiles[randomValue]);
                     humanObj.SetActive(true);
-                    humanComponent.SetColor(humanColor);
+                    humanComponent.SetColor(colorData);
                     humanComponent.humanClickArea.OnHumanClicked += human =>
                     {
-                        bool SitableOnBus = /*busQueue.ActiveBus.BusColor == human.Color&&*/
+                        bool SitableOnBus = busQueue.ActiveBus.BusColor == human.Color&&
                                             !busQueue.ActiveBus.allSeatsFull;
                         if (!SitableOnBus)
                         {
@@ -65,8 +66,8 @@ namespace Spesfic.Code.Grid_System
 
                         //mümkünse bus queue'ya ekle değilse matcing area'ya ekle
                         var walkBaseTime = .25f;
-                        Debug.Log("TODO General Color Data Oluştur");
-                        bool SitableOnBus = /*busQueue.ActiveBus.BusColor == human.Color&&*/!busQueue.ActiveBus.allSeatsFull;
+                        Debug.Log("TODO General Color Data Oluştur".Red());
+                        bool SitableOnBus = busQueue.ActiveBus.BusColor == human.Color&&!busQueue.ActiveBus.allSeatsFull;
                         if (SitableOnBus)
                         {
                             Debug.Log("Add Human to bus".Blue());

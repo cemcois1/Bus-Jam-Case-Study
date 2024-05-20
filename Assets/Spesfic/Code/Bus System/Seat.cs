@@ -1,3 +1,4 @@
+using Spesfic.Code.Color_Data;
 using UnityEngine;
 
 namespace Spesfic.Code.Bus_System
@@ -9,10 +10,10 @@ namespace Spesfic.Code.Bus_System
 
         [SerializeField] private Transform human;
         
-        public void SetColor(Color color)
+        public void SetColor(MatchableColorData color)
         {
             if (human == null) return;
-            human.GetComponent<MeshRenderer>().material.color = color;
+            human.GetComponent<MeshRenderer>().material.color = color.humanColor;
         }
 
         public void SetHuman(Human human)

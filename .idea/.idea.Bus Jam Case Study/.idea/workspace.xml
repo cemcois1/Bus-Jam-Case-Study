@@ -7,12 +7,15 @@
     <list default="true" id="0fe5ed06-d1e6-4663-a2cc-c57abc413657" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Bus Jam Case Study/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Bus Jam Case Study/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Main Scene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Main Scene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Spesfic/Code/Bus System/Bus.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Spesfic/Code/Bus System/Bus.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Spesfic/Code/Bus System/BusQueue.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Spesfic/Code/Bus System/BusQueue.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Spesfic/Code/Bus System/Prefabs/Bus_1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Spesfic/Code/Bus System/Prefabs/Bus_1.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Spesfic/Code/Bus System/Seat.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Spesfic/Code/Bus System/Seat.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Spesfic/Code/Grid System/LevelCreator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Spesfic/Code/Grid System/LevelCreator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Spesfic/Code/Grid System/Prefab/Tile.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Spesfic/Code/Grid System/Prefab/Tile.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Spesfic/Code/Human/Human.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Spesfic/Code/Human/Human.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Spesfic/Code/Human/HumanClickArea.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Spesfic/Code/Human/HumanClickArea.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Spesfic/Code/MatchArea.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Spesfic/Code/MatchArea/MatchAreaManager.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Spesfic/Code/MatchArea/MatchAreaManager.cs.meta" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,7 +26,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Assets/Spesfic/Code/Grid System/HumanGridManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Spesfic/Code/Color Data/MatchableColorData.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Spesfic/Code/Grid System/LevelCreator.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
@@ -81,10 +84,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="16188">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="16188" />
+      <option name="pid" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -107,7 +110,8 @@
       <workItem from="1715932157341" duration="6364000" />
       <workItem from="1715950837032" duration="4958000" />
       <workItem from="1716043286308" duration="13628000" />
-      <workItem from="1716106396698" duration="16477000" />
+      <workItem from="1716106396698" duration="17215000" />
+      <workItem from="1716188624311" duration="1900000" />
     </task>
     <servers />
   </component>

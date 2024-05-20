@@ -4,6 +4,7 @@ using _GenericPackageStart.Code._Mechanic.CustomAttributes.FinInParentAttribute;
 using DG.Tweening;
 using Generic.Code.PoolBase;
 using Sirenix.OdinInspector;
+using Spesfic.Code.Color_Data;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -16,7 +17,7 @@ namespace Spesfic.Code.Bus_System
         [SerializeField] private List<Bus> buses;
         public Bus ActiveBus => (buses != null && buses.Count > 0) ? buses[0] : null;
         
-        [SerializeField] private List<Color> testList;
+        [SerializeField] private List<MatchableColorData> testList;
 
         [CreateInChild] public Transform busLoadablePoint;
         [CreateInChild] [SerializeField] private Transform busFinishPoint;
@@ -53,7 +54,7 @@ namespace Spesfic.Code.Bus_System
         }
 
         [Button]
-        public void CreateBusList(IList<Color> colors)
+        public void CreateBusList(IList<MatchableColorData> colors)
         {
             //her renk için bir bus çek pooldan ve listeye ekle
             for (int i = 0; i < colors.Count; i++)

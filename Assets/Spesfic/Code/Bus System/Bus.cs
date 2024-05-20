@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Spesfic.Code.Color_Data;
 using UnityEngine;
 
 namespace Spesfic.Code.Bus_System
@@ -12,13 +13,13 @@ namespace Spesfic.Code.Bus_System
         public bool allSeatsFull=> seats.TrueForAll(x => x.IsFull);        
         [SerializeField] private List<MeshRenderer> meshRenderers;
 
-        public Color BusColor => busColor;
-        [SerializeField] private Color busColor=Color.grey;
+        public MatchableColorData BusColor => busColor;
+        [SerializeField] private MatchableColorData busColor;
 
 
-        public void SetColor(Color color)
+        public void SetColor(MatchableColorData color)
         {
-            meshRenderers.ForEach(x => x.material.color = color);
+            meshRenderers.ForEach(x => x.material.color = color.BusColor);
             busColor = color;
             seats.ForEach(x=>x.SetColor(color));
         }

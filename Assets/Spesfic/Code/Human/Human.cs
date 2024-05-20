@@ -2,6 +2,7 @@ using System;
 using _GenericPackageStart.Core.CustomAttributes;
 using DG.Tweening;
 using Spesfic.Code.Bus_System;
+using Spesfic.Code.Color_Data;
 using Spesfic.Code.Grid_System;
 using UnityEngine;
 
@@ -14,14 +15,14 @@ namespace Spesfic.Code
     {
         [FindInChildren][SerializeField] private SkinnedMeshRenderer skinnedMeshRenderer;
         public HumanClickArea humanClickArea;
-        public Color Color => color;
-        private Color color;
+        public MatchableColorData Color => color;
+        private MatchableColorData color;
         public float walkSpeed=1f;
 
-        public void SetColor(Color color)
+        public void SetColor(MatchableColorData color)
         {
             this.color = color;
-            skinnedMeshRenderer.material.color = color;
+            skinnedMeshRenderer.material.color = color.humanColor;
         }
         public void PlaceToTile(Tile tile)
         {
