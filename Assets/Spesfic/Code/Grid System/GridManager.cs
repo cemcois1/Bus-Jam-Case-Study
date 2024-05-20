@@ -238,6 +238,10 @@ namespace Spesfic.Code.Grid_System
 
         #endregion
 
+        public List<Human> GetAllHoldedItems()
+        {
+            return tiles.FindAll(tile => tile.IsFull).Select(tile => tile.GetHoldedHuman()).ToList();
+        }
     }
     
 }

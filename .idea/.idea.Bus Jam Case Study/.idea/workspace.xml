@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0fe5ed06-d1e6-4663-a2cc-c57abc413657" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Spesfic/Code/Human/Prefabs/Human.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Spesfic/Code/Human/Prefabs/Human.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Spesfic/Code/Grid System/LevelCreator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Spesfic/Code/Grid System/LevelCreator.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,8 +16,13 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/Generic/Code/Timer System/AdvancedTimer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Spesfic/Code/Color Data/MatchableColorData.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Spesfic/Code/General Manager/LevelManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Spesfic/Code/Grid System/LevelCreator.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Spesfic/Code/Puzzle Timer/PuzzleTimeUpdater.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Spesfic/Code/Puzzle Timer/PuzzleTimer.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Spesfic/Code/Tutorials/TapToPlayTutorial.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
@@ -101,7 +106,7 @@
       <workItem from="1715950837032" duration="4958000" />
       <workItem from="1716043286308" duration="13628000" />
       <workItem from="1716106396698" duration="17215000" />
-      <workItem from="1716188624311" duration="12345000" />
+      <workItem from="1716188624311" duration="26106000" />
     </task>
     <servers />
   </component>

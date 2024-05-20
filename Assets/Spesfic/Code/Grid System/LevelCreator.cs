@@ -1,13 +1,17 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using _GenericPackageStart.Code._Mechanic.CustomAttributes.FinInParentAttribute;
 using _SpesficCode.Timer;
 using DG.Tweening;
 using Generic.Code.PoolBase;
+using Sirenix.OdinInspector;
 using Spesfic.Code.Bus_System;
 using Spesfic.Code.Color_Data;
 using Spesfic.Code.MatchArea;
+using UnityEditor;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Spesfic.Code.Grid_System
 {
@@ -20,6 +24,9 @@ namespace Spesfic.Code.Grid_System
         [SerializeField,FindInParent] private PoolBase humanBase;
         [SerializeField] private List<MatchableColorData> colors;
         [SerializeField] private Vector3 additionalPlacementOffset;
+
+        [SerializeField] private int seed;
+        [SerializeField] private bool createdInEditorTime=false;
         
         private void OnEnable()
         {
@@ -31,32 +38,33 @@ namespace Spesfic.Code.Grid_System
         {
             if (CheckGridPlaceability(out var placeableTiles)) return;
             //bütün renklerden 3 tane insan oluştur ve random bir şekilde yerleştir
-            foreach (var colorData in colors)
+            foreach (var placeableTile in placeableTiles)
             {
-                for (int i = 0; i < 3; i++)
+                if (placeableTile.DefaultColorData.matchableColorData!=null)
                 {
-                    CreateColoredHumans(placeableTiles, colorData);
+                    CreateColoredHuman(placeableTile);
                 }
             }
-
             busQueue.CreateBusList(colors);
 
             
             //placeableTiles içerisine random bir şekilde insanları yerleştir
         }
 
-        private void CreateColoredHumans(List<Tile> placeableTiles, MatchableColorData colorData)
+        private void CreateColoredHuman(Tile placeableTile)
         {
             var humanObj = humanBase.GetGameobjectFromPool();
             var humanComponent = humanObj.GetComponent<Human>();
-
-            var randomValue = UnityEngine.Random.Range(0, placeableTiles.Count);
-            humanObj.transform.position = placeableTiles[randomValue]
-                .transform.position + additionalPlacementOffset;
-            placeableTiles[randomValue].SetItem(humanComponent);
-            placeableTiles.Remove(placeableTiles[randomValue]);
+            humanObj.transform.position = placeableTile.transform.position + additionalPlacementOffset;
+            placeableTile.SetItem(humanComponent);
             humanObj.SetActive(true);
-            humanComponent.SetColor(colorData);
+            humanComponent.SetColor(placeableTile.DefaultColorData.matchableColorData);
+            BindClickedEvents(humanComponent);
+        }
+
+
+        private void BindClickedEvents(Human humanComponent)
+        {
             humanComponent.humanClickArea.OnHumanClicked += human =>
             {
                 PuzzleTimer.Instance.SetIsWorking(true);
@@ -87,9 +95,23 @@ namespace Spesfic.Code.Grid_System
             };
         }
 
+        /*private void CreateColoredHumans(List<Tile> placeableTiles, MatchableColorData colorData)
+        {
+            var humanObj = humanBase.GetGameobjectFromPool();
+            var humanComponent = humanObj.GetComponent<Human>();
+
+            var randomValue = UnityEngine.Random.Range(0, placeableTiles.Count);
+            humanObj.transform.position = placeableTiles[randomValue]
+                .transform.position + additionalPlacementOffset;
+            placeableTiles[randomValue].SetItem(humanComponent);
+            placeableTiles.Remove(placeableTiles[randomValue]);
+            humanObj.SetActive(true);
+            humanComponent.SetColor(colorData);
+            BindClickedEvents(humanComponent);
+        }*/
+
         private bool CheckGridPlaceability(out List<Tile> placeableTiles)
         {
-            gridManager.ClearAllPlacedItems();
             placeableTiles = gridManager.GetPlaceableTiles();
             if (placeableTiles.Count < colors.Count * 3)
             {
@@ -98,6 +120,60 @@ namespace Spesfic.Code.Grid_System
             }
 
             return false;
+        }
+        
+        
+        [Button]
+        public void InitializeSeed()
+        {
+            Random.InitState(seed);
+        }
+        [Button]
+        public void CreateLevelInEditor()
+        {
+            Random.InitState(seed);
+            ClearTiles();
+            ThrowColorsToTiles();
+        }
+
+        [Button]
+        public void CreateRandomLevelInEditor()
+        {
+            seed = DateTime.Now.Millisecond;
+            Random.InitState(seed);
+            ClearTiles();
+            ThrowColorsToTiles();
+        }
+
+        private void ThrowColorsToTiles()
+        {
+            //listedeki her renk için 3 tane
+            var tilesRandomlyListed = gridManager.GetPlaceableTiles().OrderBy(tile => Random.Range(0,100)).ToList();
+            for (var index = 0; index < colors.Count; index++)
+            {
+                var color = colors[index];
+                for (int i = 0; i < 3; i++)
+                {
+                    var random = tilesRandomlyListed.Random();
+                    EditorUtility.SetDirty(random.DefaultColorData);
+                    random.DefaultColorData.matchableColorData = color;
+                    tilesRandomlyListed.Remove(random);
+                }
+            }
+        }
+
+        [Button]
+        private void ClearTiles()
+        {
+            createdInEditorTime = false;
+            foreach (var tile in gridManager.GetComponentsInChildren<Tile>())
+            {
+                if (tile.holdingItem == null) continue;
+                
+                DestroyImmediate(tile.holdingItem);
+                tile.DefaultColorData.matchableColorData = null;
+                tile.SetItem((Transform) null);
+            }
         }
     }
 }

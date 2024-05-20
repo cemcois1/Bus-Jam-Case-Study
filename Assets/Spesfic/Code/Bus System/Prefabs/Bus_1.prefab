@@ -660,10 +660,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7ecfc3fefc68064c9139be2e6b0d3fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LoadedTotal: 0
   seats:
   - {fileID: 6317783179308363489}
-  - {fileID: 5578987919320369804}
   - {fileID: 894867325767723421}
+  - {fileID: 5578987919320369804}
   meshRenderers:
   - {fileID: 4849975447113888807}
   busColor: {fileID: 0}

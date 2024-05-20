@@ -28,11 +28,13 @@ namespace Spesfic.Code.UI_Manager
         {
             PuzzleGameEvents.LevelFailed -= ShowFailedUI;
             PuzzleGameEvents.LevelComplated -= ShowLevelComplatedUI;
+            PuzzleGameEvents.levelStarted -= UpdateLevel;
+
         }
         public void UpdateLevel()
         {
             levelHolderCanvasGroup.OpenPanel();
-            levelText.text = LevelManager.Instance.LevelCount.ToString();
+            levelText.text ="Level "+ (1+LevelManager.Instance.LevelCount);
             tapToStartCanvasGroup.OpenPanel();
         }
         

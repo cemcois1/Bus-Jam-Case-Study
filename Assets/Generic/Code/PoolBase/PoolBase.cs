@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using DG.Tweening;
+using Sirenix.OdinInspector;
+using UnityEditor;
 using UnityEngine;
 
 namespace Generic.Code.PoolBase
@@ -10,17 +12,20 @@ namespace Generic.Code.PoolBase
         public GameObject itemPrefab; // Bus prefabı
         public int initialPoolSize = 20; // Havuz boyutu
 
-        private List<GameObject> pool;
-
+        private List<GameObject> pool= new List<GameObject>();
         void Awake()
         {
             // Mermi havuzunu başlat
             InitializeBulletPool();
         }
 
+        [Button]
+        public void ClearPool()
+        {
+            pool.Clear();
+        }
         public void InitializeBulletPool()
         {
-            pool = new List<GameObject>();
             // Belirlenen boyutta mermi nesneleri oluştur ve havuza ekle
             for (int i = 0; i < initialPoolSize; i++)
             {
@@ -33,6 +38,12 @@ namespace Generic.Code.PoolBase
         public GameObject GetGameobjectFromPool()
         {
             // Havuzda aktif olmayan bir mermi bul ve onu döndür
+            if (pool==null)
+            {
+                pool = new List<GameObject>();
+            }
+#if !UNITY_EDITOR
+            
             for (int i = 0; i < pool.Count; i++)
             {
                 if (!pool[i].activeInHierarchy)
@@ -40,9 +51,15 @@ namespace Generic.Code.PoolBase
                     return pool[i];
                 }
             }
+#endif
 
             // Havuzda uygun mermi bulunamazsa yeni bir mermi oluştur ve havuza ekle
-            GameObject newBullet = Instantiate(itemPrefab);
+#if UNITY_EDITOR
+            GameObject newBullet = PrefabUtility.InstantiatePrefab(itemPrefab) as GameObject;
+
+#else 
+GameObject newBullet = Instantiate(itemPrefab);
+#endif
             newBullet.SetActive(false);
             pool.Add(newBullet);
 

@@ -16,7 +16,7 @@ namespace Spesfic.Code.Bus_System
         public Action AllBussesFinished;
         public static Action<Bus> NewBusArrived;
         
-        [SerializeField] private List<Bus> buses;
+        public List<Bus> buses;
         public Bus ActiveBus => (buses != null && buses.Count > 0) ? buses[0] : null;
         
 
@@ -55,17 +55,22 @@ namespace Spesfic.Code.Bus_System
                 busObj.transform.SetPositionAndRotation(busLoadablePoint.position + new Vector3(i * xDistanceBetweenBusses, 0, 0), busLoadablePoint.rotation);
                 busObj.gameObject.SetActive(true);
                 var bus= busObj.GetComponent<Bus>();
-                bus.OnBussFull += () =>
-                {
-                    ShiftBussesAnimation(buses);
-                    ShiftBussesLogic();
-                };
+                RegisterBusEvent(bus);
                 bus.SetColor(colors[i]);
                 buses.Add(bus);
 
             }
         }
-        
+
+        public void RegisterBusEvent(Bus bus)
+        {
+            bus.OnBussFull += () =>
+            {
+                ShiftBussesAnimation(buses);
+                ShiftBussesLogic();
+            };
+        }
+
         public void ShiftBussesLogic()
         {
             //listenin ilk elemanını sil

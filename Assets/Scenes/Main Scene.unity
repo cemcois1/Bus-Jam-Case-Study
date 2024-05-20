@@ -2023,8 +2023,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Level 1
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: d34341c96e1503b4db9b82663c6fc686, type: 2}
-  m_sharedMaterial: {fileID: 8521817910281676522, guid: d34341c96e1503b4db9b82663c6fc686, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2106,6 +2106,54 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 995936991}
     m_Modifications:
+    - target: {fileID: 339404841592232223, guid: dde0601a6cfaf984cb05dee637a3e426, type: 3}
+      propertyPath: matchableColorData
+      value: 
+      objectReference: {fileID: 11400000, guid: 5e2e6840b1d1d6c4aa4a03ed0aa22b07, type: 2}
+    - target: {fileID: 760657915429793874, guid: dde0601a6cfaf984cb05dee637a3e426, type: 3}
+      propertyPath: holdingItem
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1069731547704644536, guid: dde0601a6cfaf984cb05dee637a3e426, type: 3}
+      propertyPath: matchableColorData
+      value: 
+      objectReference: {fileID: 11400000, guid: 5e2e6840b1d1d6c4aa4a03ed0aa22b07, type: 2}
+    - target: {fileID: 1204608603385305193, guid: dde0601a6cfaf984cb05dee637a3e426, type: 3}
+      propertyPath: matchableColorData
+      value: 
+      objectReference: {fileID: 11400000, guid: 3c23c31ad968299468d94a727f579b1e, type: 2}
+    - target: {fileID: 1204608603385305193, guid: dde0601a6cfaf984cb05dee637a3e426, type: 3}
+      propertyPath: defaultStickmanColor
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1285168518284587612, guid: dde0601a6cfaf984cb05dee637a3e426, type: 3}
+      propertyPath: stepCount
+      value: 10000
+      objectReference: {fileID: 0}
+    - target: {fileID: 1620321989622927702, guid: dde0601a6cfaf984cb05dee637a3e426, type: 3}
+      propertyPath: holdingItem
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1841690852795755037, guid: dde0601a6cfaf984cb05dee637a3e426, type: 3}
+      propertyPath: matchableColorData
+      value: 
+      objectReference: {fileID: 11400000, guid: 1785517ea5e67a24586feda931b24a80, type: 2}
+    - target: {fileID: 2039207469085483573, guid: dde0601a6cfaf984cb05dee637a3e426, type: 3}
+      propertyPath: matchableColorData
+      value: 
+      objectReference: {fileID: 11400000, guid: 3c23c31ad968299468d94a727f579b1e, type: 2}
+    - target: {fileID: 2158409072612243198, guid: dde0601a6cfaf984cb05dee637a3e426, type: 3}
+      propertyPath: holdingItem
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2552101643101570572, guid: dde0601a6cfaf984cb05dee637a3e426, type: 3}
+      propertyPath: matchableColorData
+      value: 
+      objectReference: {fileID: 11400000, guid: 5e2e6840b1d1d6c4aa4a03ed0aa22b07, type: 2}
+    - target: {fileID: 3723886462922335741, guid: dde0601a6cfaf984cb05dee637a3e426, type: 3}
+      propertyPath: holdingItem
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3871484972230141351, guid: dde0601a6cfaf984cb05dee637a3e426, type: 3}
       propertyPath: m_LocalPosition.x
       value: -724.21
@@ -2146,10 +2194,42 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4387028872764015369, guid: dde0601a6cfaf984cb05dee637a3e426, type: 3}
+      propertyPath: holdingItem
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4802127066709076136, guid: dde0601a6cfaf984cb05dee637a3e426, type: 3}
+      propertyPath: matchableColorData
+      value: 
+      objectReference: {fileID: 11400000, guid: 3c23c31ad968299468d94a727f579b1e, type: 2}
+    - target: {fileID: 5559764112288909761, guid: dde0601a6cfaf984cb05dee637a3e426, type: 3}
+      propertyPath: holdingItem
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6013652959839632457, guid: dde0601a6cfaf984cb05dee637a3e426, type: 3}
+      propertyPath: holdingItem
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6791766802280497621, guid: dde0601a6cfaf984cb05dee637a3e426, type: 3}
+      propertyPath: matchableColorData
+      value: 
+      objectReference: {fileID: 11400000, guid: 1785517ea5e67a24586feda931b24a80, type: 2}
+    - target: {fileID: 7524746268227386328, guid: dde0601a6cfaf984cb05dee637a3e426, type: 3}
+      propertyPath: holdingItem
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8452140052838824527, guid: dde0601a6cfaf984cb05dee637a3e426, type: 3}
+      propertyPath: holdingItem
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8611662732299884635, guid: dde0601a6cfaf984cb05dee637a3e426, type: 3}
       propertyPath: m_Name
       value: 3 x 3 Grid
       objectReference: {fileID: 0}
+    - target: {fileID: 9085111017627852377, guid: dde0601a6cfaf984cb05dee637a3e426, type: 3}
+      propertyPath: matchableColorData
+      value: 
+      objectReference: {fileID: 11400000, guid: 1785517ea5e67a24586feda931b24a80, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2330,6 +2410,7 @@ GameObject:
   m_Component:
   - component: {fileID: 995936991}
   - component: {fileID: 995936992}
+  - component: {fileID: 995936993}
   m_Layer: 0
   m_Name: 1
   m_TagString: Untagged
@@ -2370,6 +2451,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   seconds: 100
+--- !u!114 &995936993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 995936990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68cdbd878578a0f4e957cbc58d3fb619, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1002561603
 GameObject:
   m_ObjectHideFlags: 0
@@ -4110,6 +4203,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1785517ea5e67a24586feda931b24a80, type: 2}
   - {fileID: 11400000, guid: 3c23c31ad968299468d94a727f579b1e, type: 2}
   additionalPlacementOffset: {x: 0, y: 0.12, z: 0}
+  seed: 136
+  createdInEditorTime: 0
 --- !u!1 &1952627921
 GameObject:
   m_ObjectHideFlags: 0

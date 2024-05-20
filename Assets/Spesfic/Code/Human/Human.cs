@@ -28,7 +28,16 @@ namespace Spesfic.Code
         public void SetColor(MatchableColorData color)
         {
             this.color = color;
-            skinnedMeshRenderer.material.color = color.humanColor;
+#if UNITY_EDITOR
+            //yeni material oluşturup atamak gerekiyor yoksa diğer humanlar da etkileniyor
+            skinnedMeshRenderer.sharedMaterial = new Material(skinnedMeshRenderer.sharedMaterial)
+            {
+                color = color.humanColor
+            };
+#else
+                        skinnedMeshRenderer.material.color = color.humanColor;
+
+#endif
         }
         public void PlaceToTile(Tile tile)
         {

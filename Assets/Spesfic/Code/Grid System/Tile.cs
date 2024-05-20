@@ -1,7 +1,9 @@
 using System;
+using _GenericPackageStart.Code._Mechanic.CustomAttributes.FinInParentAttribute;
 using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Spesfic.Code.Grid_System
 {
@@ -15,11 +17,13 @@ namespace Spesfic.Code.Grid_System
         [SerializeField] public Transform holdingItem;
 
         public int StepCount => stepCount;
+        [FindInParent]public DefaultItemColorData DefaultColorData;
+
         [SerializeField,ReadOnly]private int stepCount=10000;
         public TextMeshPro text;
         [SerializeField] private MeshRenderer meshRenderer;
 
-         public Color BaseColor;
+        public Color BaseColor;
             
         private void OnEnable()
         {
@@ -58,8 +62,15 @@ namespace Spesfic.Code.Grid_System
 
         private void OnDrawGizmos()
         {
-            var color = isObstacle/*|| IsFull*/ ? Color.red : Color.green;
+            var color = isObstacle/*|| IsFull*/ ? Color.red : Color.black;
             color.a= .5f;
+
+            if (DefaultColorData.matchableColorData != null)
+            {
+                color = DefaultColorData.matchableColorData.humanColor;
+
+            }
+
             Gizmos.color = color;
             Gizmos.DrawSphere(transform.position, .2f);
         }
