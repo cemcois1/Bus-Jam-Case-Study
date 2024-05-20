@@ -12,12 +12,17 @@ namespace Spesfic.Code.Grid_System
         public bool IsFull => holdingItem != null;
         public bool isObstacle=> stepCount==ObstacleStepCount;
         public bool isUnknownTile => stepCount == UnkownStepCount;
-        [SerializeField] private Transform holdingItem;
+        [SerializeField] public Transform holdingItem;
 
         public int StepCount => stepCount;
         [SerializeField,ReadOnly]private int stepCount=10000;
         public TextMeshPro text;
 
+        public Human GetHoldedHuman()
+        {
+            if (holdingItem == null) return null;
+            return holdingItem.GetComponent<Human>();
+        }
         public void SetItem(Transform item)
         {
             holdingItem = item;

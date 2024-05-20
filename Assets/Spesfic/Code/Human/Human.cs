@@ -40,9 +40,19 @@ namespace Spesfic.Code
             transform.DOScale(transform.localScale,.5f).From(Vector3.zero).SetEase(Ease.OutBounce);
         }
 
+        public void MoveToBus(Vector3 loadablePosition, Bus ActiveBus)
+        {
+            humanClickArea.animator.SetTrigger("Run");
+            transform.DOLookAt(loadablePosition, .05f);
+            transform.DOMove(loadablePosition,
+                Vector3.Distance(loadablePosition, transform.position) / walkSpeed).OnComplete(
+                () => ActiveBus.AddHuman(this));
+        }
         public void IdleAnim()
         {
             humanClickArea.animator.SetTrigger("Idle");
         }
+
+
     }
 }

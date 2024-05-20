@@ -13,6 +13,7 @@ namespace Spesfic.Code.Bus_System
     public class BusQueue : MonoBehaviour
     {
         public Action AllBussesFinished;
+        public static Action<Bus> NewBusArrived;
         
         [SerializeField] private List<Bus> buses;
         public Bus ActiveBus => (buses != null && buses.Count > 0) ? buses[0] : null;
@@ -64,6 +65,12 @@ namespace Spesfic.Code.Bus_System
                 busObj.transform.SetPositionAndRotation(busLoadablePoint.position + new Vector3(i * xDistanceBetweenBusses, 0, 0), busLoadablePoint.rotation);
                 busObj.gameObject.SetActive(true);
                 var bus= busObj.GetComponent<Bus>();
+                bus.OnBussFull += () =>
+                {
+                    Debug.Log("Bus is full".Red());
+                    ShiftBussesAnimation(buses);
+                    ShiftBussesLogic();
+                };
                 bus.SetColor(colors[i]);
                 buses.Add(bus);
 
@@ -85,6 +92,7 @@ namespace Spesfic.Code.Bus_System
         public Sequence ShiftBussesAnimation(List<Bus> shiftableBuses)
         {
             var busMovementSequence = DOTween.Sequence();
+            busMovementSequence.AppendInterval(.3f);
             //busses listesindeki tüm busları hedef noktaya doğru hareket ettir
             for (int i = 0; i < shiftableBuses.Count; i++)
             {
@@ -97,7 +105,15 @@ namespace Spesfic.Code.Bus_System
                     .DOMove(busLoadablePoint.position + new Vector3((i - 1) * xDistanceBetweenBusses, 0, 0), busMovementTime)
                     .SetEase(busMovementCurve));
             }
-            
+
+            busMovementSequence.OnComplete(() =>
+            {
+                if (shiftableBuses.Count > 0)
+                {
+                    Debug.Log(shiftableBuses+" Bus arrived".Blue(),shiftableBuses[0]);
+                    NewBusArrived?.Invoke(shiftableBuses[0]);
+                }
+            });
             return busMovementSequence;
         }
         

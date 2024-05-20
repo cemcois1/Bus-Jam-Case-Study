@@ -793,6 +793,7 @@ MonoBehaviour:
   - {fileID: 1038203713}
   - {fileID: 945423583}
   - {fileID: 1489294120}
+  busQueue: {fileID: 502900308}
 --- !u!1001 &300909196
 PrefabInstance:
   m_ObjectHideFlags: 0

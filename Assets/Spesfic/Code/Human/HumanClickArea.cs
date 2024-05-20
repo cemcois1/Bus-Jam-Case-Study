@@ -66,7 +66,6 @@ namespace Spesfic.Code
             }
         }
 
-
         [Button]
         public void MakeUnClickable()
         {

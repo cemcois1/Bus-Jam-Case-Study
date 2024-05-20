@@ -51,7 +51,7 @@ namespace Spesfic.Code.Grid_System
                     humanComponent.SetColor(colorData);
                     humanComponent.humanClickArea.OnHumanClicked += human =>
                     {
-                        bool SitableOnBus = busQueue.ActiveBus.BusColor == human.Color&&
+                        bool SitableOnBus = busQueue.ActiveBus.BusColor == human.Color&& 
                                             !busQueue.ActiveBus.allSeatsFull;
                         if (!SitableOnBus)
                         {
@@ -65,18 +65,15 @@ namespace Spesfic.Code.Grid_System
                         Debug.Log("Clicked".Red());
 
                         //mümkünse bus queue'ya ekle değilse matcing area'ya ekle
-                        var walkBaseTime = .25f;
                         Debug.Log("TODO General Color Data Oluştur".Red());
                         bool SitableOnBus = busQueue.ActiveBus.BusColor == human.Color&&!busQueue.ActiveBus.allSeatsFull;
                         if (SitableOnBus)
                         {
                             Debug.Log("Add Human to bus".Blue());
                             var loadablePosition = busQueue.busGatePoint.position+ additionalPlacementOffset;
-                            human.transform.DOLookAt(loadablePosition, .05f);
-                            human.transform.DOMove(loadablePosition,
-                                Vector3.Distance(loadablePosition,human.transform.position) /human.walkSpeed).OnComplete(
-                                ()=>busQueue.ActiveBus.AddHuman(human)
-                            );
+                            human.MoveToBus(loadablePosition ,busQueue.ActiveBus);
+                            
+                            
                         }
                         else
                         {
