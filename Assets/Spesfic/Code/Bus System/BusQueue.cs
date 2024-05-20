@@ -33,6 +33,7 @@ namespace Spesfic.Code.Bus_System
         [SerializeField] float busMovementTime = 1f;
 
         [SerializeField] private AnimationCurve busMovementCurve;
+        public bool isShifting=false;
 
         private void OnEnable()
         {
@@ -84,6 +85,7 @@ namespace Spesfic.Code.Bus_System
         [Button]
         public Sequence ShiftBussesAnimation(List<Bus> shiftableBuses)
         {
+            isShifting = true;
             var busMovementSequence = DOTween.Sequence();
             busMovementSequence.AppendInterval(.3f);
             //busses listesindeki tüm busları hedef noktaya doğru hareket ettir
@@ -99,11 +101,19 @@ namespace Spesfic.Code.Bus_System
                     .SetEase(busMovementCurve));
             }
 
-            busMovementSequence.OnComplete(() =>
+            busMovementSequence.AppendCallback(() =>
             {
                 if (shiftableBuses.Count > 0)
                 {
                     NewBusArrived?.Invoke(shiftableBuses[0]);
+                }
+            });
+            busMovementSequence.AppendInterval(.1f);
+            busMovementSequence.AppendCallback(() =>
+            {
+                if (shiftableBuses.Count > 0)
+                {
+                    isShifting = true;
                 }
             });
             return busMovementSequence;
