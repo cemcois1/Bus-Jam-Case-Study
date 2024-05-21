@@ -11,8 +11,9 @@ using UnityEngine;
 namespace Spesfic.Code.MatchArea
 {
     //sadece boş olan tilelere insanları yerleştireceğiz tamamen dolu olduğunda match alanı oluşturulacak
-    public class MatchAreaManager:Singleton<MatchAreaManager>
+    public class MatchAreaManager: MonoBehaviour
     {
+        public static MatchAreaManager Instance;
         [SerializeField] private List<Tile> tiles = new();
         [FindInParent][SerializeField] private BusQueue busQueue;
         
@@ -22,6 +23,7 @@ namespace Spesfic.Code.MatchArea
         private void OnEnable()
         {
             BusQueue.NewBusArrived += CheckMatchArea;
+            Instance = this;
         }
 
         private void OnDisable()
@@ -66,7 +68,12 @@ namespace Spesfic.Code.MatchArea
         {
             tiles = transform.GetComponentsInChildren<Tile>().OrderBy(tile => tile.transform.position.x).ToList();
         }
-        
 
+
+        public bool FindTile(Tile holdedTile)
+        {
+            return tiles.Contains(holdedTile);
+            
+        }
     }
 }

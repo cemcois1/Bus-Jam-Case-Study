@@ -11,8 +11,9 @@ using UnityEngine.Serialization;
 
 namespace Spesfic.Code.Bus_System
 {
-    public class BusQueue : Singleton<BusQueue>
+    public class BusQueue : MonoBehaviour
     {
+        public static BusQueue Instance;
         public Action AllBussesFinished;
         public static Action<Bus> NewBusArrived;
         
@@ -38,6 +39,7 @@ namespace Spesfic.Code.Bus_System
         private void OnEnable()
         {
             AllBussesFinished+=PuzzleGameEvents.LevelComplated;
+            Instance = this;
         }
 
         private void OnDisable()
@@ -67,6 +69,14 @@ namespace Spesfic.Code.Bus_System
         {
             bus.OnBussFull += () =>
             {
+                //seatteki yolcuları seate oturt
+                bus.seats.ForEach(seat =>
+                {
+                    if (seat.IsFull)
+                    {
+                        seat.SetHuman(seat.human.GetComponent<Human>());
+                    }
+                });
                 ShiftBussesAnimation(buses);
                 ShiftBussesLogic();
             };
@@ -85,8 +95,8 @@ namespace Spesfic.Code.Bus_System
         [Button]
         public Sequence ShiftBussesAnimation(List<Bus> shiftableBuses)
         {
-            isShifting = true;
             var busMovementSequence = DOTween.Sequence();
+            busMovementSequence.PrependCallback(()=> isShifting = true);
             busMovementSequence.AppendInterval(.3f);
             //busses listesindeki tüm busları hedef noktaya doğru hareket ettir
             for (int i = 0; i < shiftableBuses.Count; i++)
@@ -100,7 +110,7 @@ namespace Spesfic.Code.Bus_System
                     .DOMove(busLoadablePoint.position + new Vector3((i - 1) * xDistanceBetweenBusses, 0, 0), busMovementTime)
                     .SetEase(busMovementCurve));
             }
-
+            
             busMovementSequence.AppendCallback(() =>
             {
                 if (shiftableBuses.Count > 0)
@@ -113,7 +123,7 @@ namespace Spesfic.Code.Bus_System
             {
                 if (shiftableBuses.Count > 0)
                 {
-                    isShifting = true;
+                    isShifting = false;
                 }
             });
             return busMovementSequence;

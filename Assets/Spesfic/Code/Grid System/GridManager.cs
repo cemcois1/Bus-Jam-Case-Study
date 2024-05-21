@@ -9,8 +9,19 @@ using UnityEngine;
 
 namespace Spesfic.Code.Grid_System
 {
-    public class GridManager : Singleton<GridManager>
+    public class GridManager : MonoBehaviour
     {
+        #region Singleton
+
+        public static GridManager Instance;
+
+        private void Awake()
+        {
+            Instance = this;
+        }
+
+        #endregion
+
         public List<Tile> tiles;
         public int rowCount=5;
 

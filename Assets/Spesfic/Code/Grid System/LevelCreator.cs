@@ -26,8 +26,6 @@ namespace Spesfic.Code.Grid_System
         [SerializeField] private Vector3 additionalPlacementOffset;
 
         [SerializeField] private int seed;
-        [SerializeField] private bool createdInEditorTime=false;
-        
         private void OnEnable()
         {
             CreateLevel();
@@ -43,6 +41,10 @@ namespace Spesfic.Code.Grid_System
                 if (placeableTile.DefaultColorData.matchableColorData!=null)
                 {
                     CreateColoredHuman(placeableTile);
+                }
+                else
+                {
+                    Debug.Log("tile Color is null".Red());
                 }
             }
             busQueue.CreateBusList(colors);
@@ -69,28 +71,56 @@ namespace Spesfic.Code.Grid_System
             {
                 PuzzleTimer.Instance.SetIsWorking(true);
                 bool SitableOnBus = busQueue.ActiveBus.BusColor == human.Color &&
-                                    !busQueue.ActiveBus.allSeatsFull;
+                                    !busQueue.ActiveBus.allSeatsFull&&busQueue.ActiveBus.LoadingStatedTotal<=2;
                 if (!SitableOnBus)
                 {
+                    Debug.Log("Load to Match area".Blue());
                     var emptyTile = matchAreaManager.GetEmptyTile();
                     emptyTile.SetItem(human);
+                }
+
+                if (SitableOnBus)
+                {
+                    Debug.Log("Load to bus area".Blue());
+
+                    busQueue.ActiveBus.LoadingStatedTotal += 1;
+                    if (busQueue.ActiveBus.LoadingStatedTotal<=3)
+                    {
+
+                        human.canGoBus = true;
+                    }
                 }
             };
             humanComponent.humanClickArea.HumanExitedGrid += human =>
             {
                 //mümkünse bus queue'ya ekle değilse matcing area'ya ekle
-                bool SitableOnBus = busQueue.ActiveBus.BusColor == human.Color && !busQueue.ActiveBus.allSeatsFull;
+                Debug.Log(busQueue.ActiveBus.LoadingStatedTotal);
+                bool SitableOnBus = (busQueue.ActiveBus.BusColor == human.Color) && !busQueue.ActiveBus.allSeatsFull && human.canGoBus;
                 if (SitableOnBus)
                 {
-                    Debug.Log("Add Human to bus".Blue());
                     var loadablePosition = busQueue.busGatePoint.position + additionalPlacementOffset;
                     human.MoveToBus(loadablePosition, busQueue.ActiveBus);
                 }
                 else
                 {
-                    var position = human.humanClickArea.holdedTile.transform.position +
-                                   additionalPlacementOffset;
-                    human.MoveToTile(position);
+                    Debug.Log("Add Human to Match".Red());
+
+                    //eğer holdedtile matchareaya ait değilse matchareadan boş bir alan bul ekle
+                    if (matchAreaManager.FindTile(human.humanClickArea.holdedTile))
+                    {
+                        Debug.Log("Human Tile Changed".Red());
+                        var emptyTile = matchAreaManager.GetEmptyTile();
+                        emptyTile.SetItem(human);
+                        human.MoveToTile(emptyTile.transform.position+additionalPlacementOffset);
+                    }
+                    else
+                    {
+                        var position = human.humanClickArea.holdedTile.transform.position +
+                                       additionalPlacementOffset;
+                        human.MoveToTile(position);
+                    }
+                    
+
                 }
             };
         }
@@ -155,22 +185,32 @@ namespace Spesfic.Code.Grid_System
                 for (int i = 0; i < 3; i++)
                 {
                     var random = tilesRandomlyListed.Random();
-                    EditorUtility.SetDirty(random.DefaultColorData);
                     random.DefaultColorData.matchableColorData = color;
+
+
+#if UNITY_EDITOR
+                    EditorUtility.SetDirty(random.DefaultColorData);
+                    EditorUtility.SetDirty(random.DefaultColorData.matchableColorData);
+#endif
                     tilesRandomlyListed.Remove(random);
                 }
             }
+#if UNITY_EDITOR
+            AssetDatabase.SaveAssets();
+#endif
         }
 
         [Button]
         private void ClearTiles()
         {
-            createdInEditorTime = false;
-            foreach (var tile in gridManager.GetComponentsInChildren<Tile>())
+            foreach (var tile in gridManager.GetPlaceableTiles())
             {
-                if (tile.holdingItem == null) continue;
+                if (tile.holdingItem != null)
+                {
+                    DestroyImmediate(tile.holdingItem);
+                }
                 
-                DestroyImmediate(tile.holdingItem);
+                
                 tile.DefaultColorData.matchableColorData = null;
                 tile.SetItem((Transform) null);
             }

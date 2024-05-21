@@ -24,6 +24,7 @@ namespace Spesfic.Code
         public MatchableColorData Color => color;
         private MatchableColorData color;
         public float walkSpeed=1f;
+        public bool canGoBus;
 
         public void SetColor(MatchableColorData color)
         {
@@ -58,15 +59,15 @@ namespace Spesfic.Code
 
         public TweenerCore<Vector3, Vector3, VectorOptions> MoveToBus(Vector3 loadablePosition, Bus ActiveBus)
         {
+            //Debug.Log("move to bus!");
             humanClickArea.animator.SetTrigger("Run");
-            ActiveBus.LoadedTotal += 1;
             transform.DOLookAt(loadablePosition, .05f);
             return transform.DOMove(loadablePosition,
                 Vector3.Distance(loadablePosition, transform.position) / walkSpeed).SetEase(Ease.Linear).OnComplete(
                 () =>
                 {
                     ActiveBus.AddHuman(this);
-                    Debug.Log("Human added to bus!");
+                    //Debug.Log("Human added to bus!");
                 });
         }
         public void IdleAnim()
@@ -78,19 +79,21 @@ namespace Spesfic.Code
         public void MoveToTile(Vector3 position)
         {
             transform.DOLookAt(position, .05f);
-            var isFailed = MatchAreaManager.Instance.IsFull && BusQueue.Instance.ActiveBus.LoadedTotal != 3;
+            //Debug.Log("move to tile!");
+            var isFailed = MatchAreaManager.Instance.IsFull && BusQueue.Instance.ActiveBus.LoadingStatedTotal != 3;
             transform.DOMove(position,
                     Vector3.Distance(position, transform.position) / walkSpeed)
                 .OnComplete(() =>
                 {
                     IdleAnim();
+                    //Debug.Log("Arrived to Match area ".Red());
                     transform.DOLookAt(new Vector3(0, 0, 100000f), .05f);
                     if (MatchAreaManager.Instance.IsFull)
                     {
                         PuzzleGameEvents.LevelFailed.Invoke(0);
                         if (BusQueue.Instance.ActiveBus.allSeatsFull)
                         {
-                            Debug.Log("Match area is full but no bus is available".Red());
+                            //Debug.Log("Match area is full but no bus is available".Red());
                             if (isFailed)
                             {
                                 PuzzleGameEvents.LevelFailed.Invoke(0);

@@ -8,7 +8,7 @@ namespace Spesfic.Code.Bus_System
         public bool IsFull=> human != null;
         public Vector3 SitRotation=new Vector3(0,90,0);
 
-        [SerializeField] private Transform human;
+        [SerializeField] public Transform human;
         
         public void SetColor(MatchableColorData color)
         {

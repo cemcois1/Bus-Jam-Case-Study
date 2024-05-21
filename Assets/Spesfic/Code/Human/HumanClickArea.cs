@@ -24,7 +24,7 @@ namespace Spesfic.Code
 
         private async void OnMouseDown()
         {
-            if ((BusQueue.Instance.ActiveBus.LoadedTotal == 3||BusQueue.Instance.isShifting)&&MatchAreaManager.Instance.IsLastEmptyTile) return;
+            if ((BusQueue.Instance.ActiveBus.LoadingStatedTotal == 3||BusQueue.Instance.isShifting)&&MatchAreaManager.Instance.IsLastEmptyTile) return;
 
             if (!holdedTile.isUnknownTile&&!MatchAreaManager.Instance.IsFull)
             {
